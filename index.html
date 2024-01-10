@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>URL先のファイルを表示する</title>
+</head>
+<body>
+  <h1>URL先のファイルを表示する</h1>
+  <form>
+    <label for="urlInput">URL:</label>
+    <input type="text" id="urlInput">
+    <button type="button" onclick="loadFile()">表示</button>
+  </form>
+  <div id="fileContent"></div>
+
+  <script>
+    function loadFile() {
+      var urlInput = document.getElementById("urlInput").value;
+      var fileContent = document.getElementById("fileContent");
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", urlInput, true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          fileContent.textContent = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
